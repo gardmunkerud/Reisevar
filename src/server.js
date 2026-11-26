@@ -41,7 +41,9 @@ function createApp() {
   });
 
   // The page itself: adds the AdSense site-verification tag, and nonces when ads are live.
-  const indexPath = path.join(__dirname, '..', 'public', 'index.html');
+  // The page lives outside public/ so it is always served through this route (security headers, AdSense tags);
+  // on Vercel, files in public/ are served straight from the CDN and would bypass the server.
+  const indexPath = path.join(__dirname, 'index.html');
   const cachedIndex = require('fs').readFileSync(indexPath, 'utf8');
   app.get(['/', '/index.html'], (req, res) => {
     let html = config.isProd ? cachedIndex : require('fs').readFileSync(indexPath, 'utf8');
@@ -54,8 +56,6 @@ function createApp() {
     res.set('Cache-Control', 'no-cache').type('html').send(html);
   });
   app.use(express.static(path.join(__dirname, '..', 'public'), { index: false }));
-  const leaflet = path.join(__dirname, '..', 'node_modules', 'leaflet', 'dist');
-  app.use('/vendor/leaflet', express.static(leaflet));
 
   // Per-IP rate limit for the API (protects the free services we depend on).
   const hits = new Map();
@@ -110,10 +110,13 @@ function createApp() {
   return app;
 }
 
+// Vercel runs the exported app as a function; locally (npm run dev / start) it listens on a port.
+const app = createApp();
 if (require.main === module) {
-  createApp().listen(config.port, () => {
+  app.listen(config.port, () => {
     console.log(`Reisevær running at http://localhost:${config.port}${config.metContact ? '' : ' – MET_CONTACT missing in .env, weather is switched off'}`);
   });
 }
 
-module.exports = { createApp };
+module.exports = app;
+module.exports.createApp = createApp;

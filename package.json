@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
+    "build": "node scripts/copy-vendor.js",
+    "postinstall": "node scripts/copy-vendor.js",
     "test": "node tests/run.js",
     "build:towns": "node scripts/build-towns.js",
     "build:towns:au": "node scripts/build-towns-au.js"

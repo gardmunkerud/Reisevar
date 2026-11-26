@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Reisevær</title>
+  <defs>
+    <linearGradient id="rv-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173f63"/><stop offset="1" stop-color="#1f5f8b"/></linearGradient>
+    <linearGradient id="rv-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd25e"/><stop offset="1" stop-color="#ff8a1f"/></linearGradient>
+    <clipPath id="rv-clip"><rect width="64" height="64" rx="16"/></clipPath>
+  </defs>
+  <g clip-path="url(#rv-clip)">
+    <rect width="64" height="64" fill="url(#rv-sky)"/>
+    <path d="M13 38a19 19 0 0 1 38 0z" fill="url(#rv-sun)"/>
+    <rect y="38" width="64" height="26" fill="#2f7fb3"/>
+    <path d="M20 64 31 38h2l11 26z" fill="#fff"/>
+    <path d="M31.6 44.5h.8l.3 4h-1.4zM31.1 53h1.8l.5 6.5h-2.8z" fill="#2f7fb3"/>
+  </g>
+</svg>

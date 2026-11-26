@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Finn stoppestedene med best vær på bilturen din i Australia og Norge.">
+  <title>Reisevær</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div class="panel">
+      <header class="header">
+        <a class="brand" href="/">
+          <img class="logo" src="/logo.svg" alt="" width="32" height="32">
+          <span>Reisevær</span>
+        </a>
+        <div class="toggles">
+        <div class="lang region" role="group" aria-label="Land / Country">
+          <button type="button" data-region="au" aria-pressed="true" data-i18n="regionAu"></button>
+          <button type="button" data-region="no" aria-pressed="false" data-i18n="regionNo"></button>
+        </div>
+        <div class="lang" role="group" aria-label="Språk / Language">
+          <button type="button" data-lang="nb" aria-pressed="true">Norsk</button>
+          <button type="button" data-lang="en" aria-pressed="false">English</button>
+        </div>
+        </div>
+      </header>
+
+      <section class="intro">
+        <h1 data-i18n="headline"></h1>
+        <p data-i18n="lead"></p>
+      </section>
+
+      <div class="notice" id="config-notice" hidden data-i18n="notConfigured"></div>
+
+      <form class="trip" id="trip" autocomplete="off" novalidate>
+        <div class="places">
+          <div class="field place" data-role="from">
+            <label for="from" data-i18n="from"></label>
+            <input id="from" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="from-list" spellcheck="false" data-i18n-placeholder="fromPlaceholder">
+            <ul class="suggest" id="from-list" role="listbox" hidden></ul>
+          </div>
+          <button class="swap" id="swap" type="button" data-i18n-label="swap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v15M3.5 15.5 7 19l3.5-3.5M17 20V5M13.5 8.5 17 5l3.5 3.5"/></svg>
+          </button>
+          <div class="field place" data-role="to">
+            <label for="to" data-i18n="to"></label>
+            <input id="to" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="to-list" spellcheck="false" data-i18n-placeholder="toPlaceholder">
+            <ul class="suggest" id="to-list" role="listbox" hidden></ul>
+          </div>
+        </div>
+        <div class="when">
+          <div class="field">
+            <label for="date-btn" data-i18n="date"></label>
+            <!-- Own date picker: opens and closes on click (the browser's built-in picker can't be closed from the page). -->
+            <button class="date-btn" id="date-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="date-pop">
+              <span id="date-label"></span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14.5" rx="3"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg>
+            </button>
+            <input id="date" type="hidden">
+            <div class="date-pop" id="date-pop" role="dialog" hidden></div>
+          </div>
+          <div class="field days-field">
+            <label for="days" data-i18n="days"></label>
+            <div class="stepper">
+              <select id="days"></select>
+              <div class="step-btns">
+                <button type="button" id="days-up" data-i18n-label="moreDays">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+                </button>
+                <button type="button" id="days-down" data-i18n-label="fewerDays">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button class="go" id="go" type="submit">
+            <span data-i18n="submit"></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+      </form>
+
+      <section class="results" id="results" aria-live="polite"></section>
+
+      <aside class="ad-slot" id="ad-slot" hidden>
+        <span class="ad-label" data-i18n="ad"></span>
+        <div class="ad-box" id="ad-box"></div>
+      </aside>
+
+      <footer class="credits">
+        <p data-i18n-html="credits"></p>
+      </footer>
+    </div>
+
+    <div class="map-wrap">
+      <div id="map" class="map" role="region" data-i18n-label="map"></div>
+    </div>
+  </div>
+
+  <script src="/vendor/leaflet/leaflet.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

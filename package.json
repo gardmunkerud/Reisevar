@@ -1,0 +1,22 @@
+{
+  "name": "reisevaer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reisevær – find the warmest and sunniest stops on a road trip in Australia or Norway, using forecasts from MET Norway (Yr).",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node tests/run.js",
+    "build:towns": "node scripts/build-towns.js",
+    "build:towns:au": "node scripts/build-towns-au.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.3.0",
+    "leaflet": "^1.9.4"
+  }
+}

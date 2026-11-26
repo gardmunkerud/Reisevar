@@ -5,7 +5,7 @@
   // --- Texts --------------------------------------------------------------------------
   const T = {
     nb: {
-      headline: 'Finn solen på bilturen', lead: 'Skriv inn hvor du starter og hvor du skal. Reisevær foreslår stopp langs ruten der været er varmest og sol­rikest.',
+      headline: 'Hei Jens, hvor går turen?', lead: 'Skriv inn hvor du starter og hvor du skal. Reisevær foreslår stopp langs ruten der været er varmest og sol­rikest.',
       from: 'Fra', to: 'Til', fromPlaceholder: 'By, sted eller adresse', toPlaceholder: 'By, sted eller adresse', swap: 'Bytt fra og til',
       date: 'Avreise', days: 'Antall dager', moreDays: 'Én dag til', fewerDays: 'Én dag færre', submit: 'Finn beste stopp', dayN: (n) => (n === 1 ? '1 dag' : `${n} dager`),
       map: 'Kart over ruten', ad: 'Annonse',
@@ -43,7 +43,7 @@
       dayChip: (n) => `Dag ${n}`,
     },
     en: {
-      headline: 'Find the sun on your road trip', lead: 'Enter where you start and where you’re going. Reisevær suggests stops along the route where the weather is warmest and sunniest.',
+      headline: 'Hi Jens, where are you heading?', lead: 'Enter where you start and where you’re going. Reisevær suggests stops along the route where the weather is warmest and sunniest.',
       from: 'From', to: 'To', fromPlaceholder: 'City, place or address', toPlaceholder: 'City, place or address', swap: 'Swap from and to',
       date: 'Departure', days: 'Number of days', moreDays: 'One more day', fewerDays: 'One day less', submit: 'Find the best stops', dayN: (n) => (n === 1 ? '1 day' : `${n} days`),
       map: 'Map of the route', ad: 'Advertisement',

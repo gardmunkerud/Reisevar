@@ -261,3 +261,18 @@ button, input, select { font: inherit; color: inherit; }
   .wx-box { grid-column: 2; justify-self: start; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition: none !important; } }
+
+/* Draggable route: hover handle, via dots and the map control */
+.route-hit { cursor: grab; }
+.via-wrap { background: none; border: 0; }
+.via-handle { display: block; box-sizing: border-box; width: 14px; height: 14px; margin: 2px; border-radius: 50%; background: #fff; border: 3px solid #1f5f8b; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35); cursor: grab; }
+.via-handle.ghost { opacity: 0.92; transform: scale(1.1); }
+.leaflet-dragging .via-handle { cursor: grabbing; }
+.route-ctl { display: flex; gap: 6px; }
+.route-ctl:empty { display: none; }
+.route-reset, .route-busy { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 0.84rem; font-weight: 600;
+  background: #fff; color: var(--text); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.22); }
+.route-reset { cursor: pointer; color: var(--light-blue-text); }
+.route-reset:hover { background: var(--light-blue); }
+.route-busy .spinner { width: 14px; height: 14px; border-width: 2px; }
+.route-hint { margin: 6px 0 0; font-size: 0.86rem; color: var(--muted); }

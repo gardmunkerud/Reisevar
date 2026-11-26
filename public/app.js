@@ -13,12 +13,14 @@
       notConfigured: 'Værvarselet er ikke slått på ennå: legg inn kontaktinformasjon i MET_CONTACT i .env-filen og start appen på nytt.',
       credits: 'Værvarsel fra <a href="https://www.met.no/" target="_blank" rel="noopener">Meteorologisk institutt</a> – de samme dataene som <a href="https://www.yr.no/" target="_blank" rel="noopener">Yr</a> bruker (<a href="https://creativecommons.org/licenses/by/4.0/deed.no" target="_blank" rel="noopener">CC BY 4.0</a>). Kart og stedsnavn © <a href="https://www.kartverket.no/" target="_blank" rel="noopener">Kartverket</a>. Ruteberegning © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bidragsytere, <a href="https://routing.openstreetmap.de/" target="_blank" rel="noopener">FOSSGIS</a>. Reisevær er ikke tilknyttet Yr eller Meteorologisk institutt.',
       regionAu: 'Australia', regionNo: 'Norge',
+      ghostTip: 'Dra for å kjøre en annen vei', viaTip: 'Dra for å flytte · klikk for å fjerne', updatingRoute: 'Oppdaterer ruten …', resetRoute: 'Tilbakestill rute',
+      dragHint: 'Tips: dra den blå ruten på kartet for å kjøre via andre byer eller veier.', viaCount: (n) => (n === 1 ? 'via 1 punkt du har valgt' : `via ${n} punkter du har valgt`),
       creditsAu: 'Værvarsel fra <a href="https://www.met.no/" target="_blank" rel="noopener">Meteorologisk institutt</a> – de samme dataene som <a href="https://www.yr.no/" target="_blank" rel="noopener">Yr</a> bruker (<a href="https://creativecommons.org/licenses/by/4.0/deed.no" target="_blank" rel="noopener">CC BY 4.0</a>). Kart, steder og ruteberegning © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bidragsytere (ODbL), stedssøk via <a href="https://photon.komoot.io/" target="_blank" rel="noopener">Photon</a>, ruter via <a href="https://routing.openstreetmap.de/" target="_blank" rel="noopener">FOSSGIS</a>. Offisielle farevarsler for Australia finner du hos <a href="https://www.bom.gov.au/" target="_blank" rel="noopener">Bureau of Meteorology</a>. Reisevær er ikke tilknyttet Yr eller Meteorologisk institutt.',
       pickFrom: 'Velg hvor du starter.', pickTo: 'Velg hvor du skal.', samePlace: 'Start og mål er det samme stedet.', noMatch: (q) => `Fant ikke «${q}». Prøv et annet stedsnavn.`,
       searching: 'Søker …', loading: (km) => (km ? `Henter værvarsel langs ${km} km vei …` : 'Beregner rute og henter værvarsel …'),
       loadingSub: 'Vi sjekker været i byer og tettsteder langs hele ruten.',
       errors: {
-        invalid_place: 'Velg steder fra listen.', different_regions: 'Start og mål må være i samme land.', invalid_date: 'Velg en gyldig dato.', invalid_days: 'Velg antall dager.',
+        invalid_place: 'Velg steder fra listen.', different_regions: 'Start og mål må være i samme land.', invalid_via: 'Ruten kan bare dras til steder i samme land.', invalid_date: 'Velg en gyldig dato.', invalid_days: 'Velg antall dager.',
         date_past: 'Avreisedatoen har allerede vært.', beyond_forecast: 'Avreisen må være innen ca. 9 dager, så langt rekker værvarselet.',
         too_many_days: 'Så mange dager blir veldig korte etapper på denne ruten. Velg færre dager.',
         too_short: 'Turen er for kort til å foreslå stopp.', no_route: 'Fant ingen kjørerute mellom stedene.',
@@ -49,12 +51,14 @@
       notConfigured: 'The weather forecast is not switched on yet: add contact information to MET_CONTACT in the .env file and restart the app.',
       credits: 'Weather forecast from the <a href="https://www.met.no/en" target="_blank" rel="noopener">Norwegian Meteorological Institute</a> – the same data that <a href="https://www.yr.no/en" target="_blank" rel="noopener">Yr</a> uses (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>). Map and place names © <a href="https://www.kartverket.no/en" target="_blank" rel="noopener">Kartverket</a>. Routing © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, <a href="https://routing.openstreetmap.de/" target="_blank" rel="noopener">FOSSGIS</a>. Reisevær is not affiliated with Yr or the Norwegian Meteorological Institute.',
       regionAu: 'Australia', regionNo: 'Norway',
+      ghostTip: 'Drag to take another road', viaTip: 'Drag to move · click to remove', updatingRoute: 'Updating the route …', resetRoute: 'Reset route',
+      dragHint: 'Tip: drag the blue route on the map to go via other towns or roads.', viaCount: (n) => (n === 1 ? 'via 1 point you chose' : `via ${n} points you chose`),
       creditsAu: 'Weather forecast from the <a href="https://www.met.no/en" target="_blank" rel="noopener">Norwegian Meteorological Institute</a> – the same data that <a href="https://www.yr.no/en" target="_blank" rel="noopener">Yr</a> uses (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>). Map, places and routing © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL), place search by <a href="https://photon.komoot.io/" target="_blank" rel="noopener">Photon</a>, routes by <a href="https://routing.openstreetmap.de/" target="_blank" rel="noopener">FOSSGIS</a>. For official Australian weather warnings, see the <a href="https://www.bom.gov.au/" target="_blank" rel="noopener">Bureau of Meteorology</a>. Reisevær is not affiliated with Yr or the Norwegian Meteorological Institute.',
       pickFrom: 'Choose where you start.', pickTo: 'Choose where you’re going.', samePlace: 'Start and destination are the same place.', noMatch: (q) => `Couldn’t find “${q}”. Try another place name.`,
       searching: 'Searching …', loading: (km) => (km ? `Fetching the forecast along ${km} km of road …` : 'Calculating the route and fetching the forecast …'),
       loadingSub: 'We check the weather in towns and villages along the whole route.',
       errors: {
-        invalid_place: 'Choose places from the list.', different_regions: 'Start and destination must be in the same country.', invalid_date: 'Choose a valid date.', invalid_days: 'Choose the number of days.',
+        invalid_place: 'Choose places from the list.', different_regions: 'Start and destination must be in the same country.', invalid_via: 'The route can only be dragged to places in the same country.', invalid_date: 'Choose a valid date.', invalid_days: 'Choose the number of days.',
         date_past: 'The departure date has already passed.', beyond_forecast: 'Departure must be within about 9 days – that’s as far as the forecast reaches.',
         too_many_days: 'That many days makes very short stages on this route. Choose fewer days.',
         too_short: 'The trip is too short to suggest stops.', no_route: 'No driving route found between the places.',
@@ -261,10 +265,13 @@
 
   function stopId(s) { return `${s.role}-${s.day}-${s.lat}-${s.lon}`; }
 
-  function drawMap(p) {
+  function drawMap(p, fit = true) {
     layers.clearLayers();
     markers.clear();
-    const line = L.polyline(p.route.line, { color: '#1f5f8b', weight: 5, opacity: 0.75 }).addTo(layers);
+    const line = L.polyline(p.route.line, { color: '#1f5f8b', weight: 5, opacity: 0.75, interactive: false }).addTo(layers);
+    // A wide, invisible copy of the line catches the mouse, so the route is easy to grab and drag.
+    const hit = L.polyline(p.route.line, { weight: 22, opacity: 0, className: 'route-hit' }).addTo(layers);
+    setupRouteDrag(line, hit);
     for (const town of p.towns) {
       L.circleMarker([town.lat, town.lon], { radius: 5, weight: 1, color: '#fff', fillColor: scoreColor(town.score), fillOpacity: 0.95 })
         .bindTooltip(`${esc(town.name)} · ${town.tempMax ?? '–'}° · ${esc(t('cloud'))} ${town.cloud ?? '–'} % · ${esc(t('dayChip')(town.day + 1))}`, { direction: 'top' })
@@ -279,7 +286,156 @@
       m.on('click', () => highlight(stopId(s), false));
       markers.set(stopId(s), m);
     });
-    map.fitBounds(line.getBounds(), { padding: [30, 30] });
+    drawVias();
+    if (fit) map.fitBounds(line.getBounds(), { padding: [30, 30] });
+  }
+
+  // --- Draggable route (like Google Maps) ----------------------------------------------------
+  // Hover the route to get a handle, drag it to another town or road, and the route and the plan are
+  // recalculated through that point. Dragged points stay as white dots: drag them again or click to remove.
+  // On touch screens, tap the route to place a handle and then drag it.
+  let vias = []; // points the route is forced through, in route order: [{ lat, lon }]
+  let route = null; // { line } – the drawn route
+  const routeUi = L.layerGroup().addTo(map); // via dots, the hover handle and the drag preview
+  let ghost = null;
+  let ghostTimer = null;
+  let dragging = false;
+  let lastDragEnd = 0;
+  let updating = false;
+  const handleIcon = (cls) => L.divIcon({ className: 'via-wrap', html: `<span class="via-handle ${cls}"></span>`, iconSize: [18, 18], iconAnchor: [9, 9] });
+
+  // Nearest point on the drawn route, and how far along the route it is (screen pixels at the current zoom).
+  function projectOnRoute(latlng) {
+    const pts = route.line.getLatLngs().map((ll) => map.latLngToLayerPoint(ll));
+    const p = map.latLngToLayerPoint(latlng);
+    let best = null;
+    let along = 0;
+    for (let i = 1; i < pts.length; i++) {
+      const q = L.LineUtil.closestPointOnSegment(p, pts[i - 1], pts[i]);
+      const d = p.distanceTo(q);
+      if (!best || d < best.d) best = { d, q, along: along + pts[i - 1].distanceTo(q) };
+      along += pts[i - 1].distanceTo(pts[i]);
+    }
+    return { latlng: map.layerPointToLatLng(best.q), along: best.along };
+  }
+  const ll = (v) => L.latLng(v.lat, v.lon);
+  // Where a new point at `along` falls among the existing via points, and the points before and after it.
+  function slotFor(along) {
+    const k = vias.filter((v) => projectOnRoute(ll(v)).along < along).length;
+    return { k, prev: k === 0 ? ll(chosen.from) : ll(vias[k - 1]), next: k === vias.length ? ll(chosen.to) : ll(vias[k]) };
+  }
+
+  function attachDrag(marker, index) {
+    let slot = null;
+    let preview = null;
+    marker.on('dragstart', () => {
+      dragging = true;
+      clearTimeout(ghostTimer);
+      slot = index == null ? slotFor(projectOnRoute(marker.getLatLng()).along)
+        : { k: index, prev: index === 0 ? ll(chosen.from) : ll(vias[index - 1]), next: index === vias.length - 1 ? ll(chosen.to) : ll(vias[index + 1]) };
+      preview = L.polyline([slot.prev, marker.getLatLng(), slot.next], { color: '#1f5f8b', weight: 4, opacity: 0.7, dashArray: '6 8', interactive: false }).addTo(routeUi);
+    });
+    marker.on('drag', () => preview.setLatLngs([slot.prev, marker.getLatLng(), slot.next]));
+    marker.on('dragend', () => {
+      dragging = false;
+      lastDragEnd = Date.now();
+      const p = marker.getLatLng();
+      const point = { lat: Math.round(p.lat * 1e5) / 1e5, lon: Math.round(p.lng * 1e5) / 1e5 };
+      const next = [...vias];
+      if (index == null) next.splice(slot.k, 0, point); else next[index] = point;
+      replan(next);
+    });
+  }
+
+  function hideGhost() {
+    if (ghost && !dragging) { routeUi.removeLayer(ghost); ghost = null; }
+  }
+  function showGhost(latlng) {
+    if (dragging || updating) return;
+    clearTimeout(ghostTimer);
+    if (ghost) { ghost.setLatLng(latlng); return; }
+    ghost = L.marker(latlng, { icon: handleIcon('ghost'), draggable: true, zIndexOffset: 1000, keyboard: false, title: t('ghostTip') }).addTo(routeUi);
+    ghost.on('mouseover', () => clearTimeout(ghostTimer));
+    ghost.on('mouseout', () => { ghostTimer = setTimeout(hideGhost, 300); });
+    attachDrag(ghost, null);
+  }
+
+  function setupRouteDrag(line, hit) {
+    route = { line };
+    hit.on('mousemove', (e) => showGhost(projectOnRoute(e.latlng).latlng));
+    hit.on('mouseout', () => { ghostTimer = setTimeout(hideGhost, 300); });
+    hit.on('click', (e) => { L.DomEvent.stopPropagation(e); showGhost(projectOnRoute(e.latlng).latlng); });
+  }
+  map.on('click', hideGhost);
+
+  function drawVias() {
+    routeUi.clearLayers();
+    ghost = null;
+    vias.forEach((v, i) => {
+      const m = L.marker(ll(v), { icon: handleIcon('via'), draggable: true, zIndexOffset: 900, keyboard: false, title: t('viaTip') }).addTo(routeUi);
+      attachDrag(m, i);
+      // Click removes the point (a click right after a drag is ignored).
+      m.on('click', () => { if (Date.now() - lastDragEnd > 400 && !updating) replan(vias.filter((_, j) => j !== i)); });
+    });
+    routeCtl.render();
+  }
+
+  // Map control: "Updating the route …" while recalculating, and "Reset route" when the route has via points.
+  const RouteCtl = L.Control.extend({
+    options: { position: 'topright' },
+    onAdd() {
+      this.div = L.DomUtil.create('div', 'route-ctl');
+      L.DomEvent.disableClickPropagation(this.div);
+      this.div.addEventListener('click', (e) => { if (e.target.closest('.route-reset') && !updating) replan([]); });
+      return this.div;
+    },
+    render() {
+      if (!this.div) return;
+      this.div.innerHTML = updating ? `<span class="route-busy"><span class="spinner" aria-hidden="true"></span>${esc(t('updatingRoute'))}</span>`
+        : vias.length && lastPlan ? `<button type="button" class="route-reset">${esc(t('resetRoute'))}</button>` : '';
+    },
+  });
+  const routeCtl = new RouteCtl().addTo(map);
+
+  async function replan(nextVias) {
+    if (loading || updating) return;
+    const before = vias;
+    vias = nextVias;
+    updating = true;
+    hideGhost();
+    routeCtl.render();
+    const ok = await requestPlan({ fit: false });
+    updating = false;
+    if (!ok) vias = before;
+    if (lastPlan) drawMap(lastPlan, false); else drawVias();
+  }
+
+  // Fetch a plan for the chosen places, days and via points, and show it. Returns true on success.
+  async function requestPlan({ fit }) {
+    loading = true;
+    els.go.disabled = true;
+    hideError();
+    if (fit) renderLoading();
+    try {
+      const res = await fetch('/api/plan', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from: chosen.from, to: chosen.to, date: els.date.value, days: Number(els.days.value), vias, lang: lang === 'en' ? 'en' : 'no' }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw Object.assign(new Error(data.error || 'default'), { code: data.error });
+      lastPlan = data;
+      renderPlan(data);
+      drawMap(data, fit);
+      return true;
+    } catch (err) {
+      if (fit) els.results.innerHTML = '';
+      const errs = t('errors');
+      showError(errs[err.code] ?? (err instanceof TypeError ? errs.network : errs.default));
+      return false;
+    } finally {
+      loading = false;
+      els.go.disabled = false;
+    }
   }
 
   function popupHtml(s) {
@@ -353,7 +509,8 @@
     els.results.innerHTML = `
       <div class="summary">
         <div class="sum-route"><span>${esc(p.from.name)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>${esc(p.to.name)}</span></div>
-        <div class="sum-meta">${p.route.km} ${esc(t('kmShort'))} · ${esc(t('hoursFmt')(p.route.hours))} ${esc(t('drive'))} · ${esc(t('dayN')(p.days.length))}</div>
+        <div class="sum-meta">${p.route.km} ${esc(t('kmShort'))} · ${esc(t('hoursFmt')(p.route.hours))} ${esc(t('drive'))} · ${esc(t('dayN')(p.days.length))}${p.vias?.length ? ` · ${esc(t('viaCount')(p.vias.length))}` : ''}</div>
+        <p class="route-hint">${esc(t('dragHint'))}</p>
         ${p.bestStop ? `<div class="sum-best">${icon('clearsky_day')}<span>${esc(t('bestLine')(p.bestStop.name, p.bestStop.day))}</span></div>` : ''}
       </div>
       ${days}
@@ -400,28 +557,11 @@
     if (!chosen.to) return showError(t('pickTo'));
     if (Math.abs(chosen.from.lat - chosen.to.lat) < 0.01 && Math.abs(chosen.from.lon - chosen.to.lon) < 0.01) return showError(t('samePlace'));
 
-    loading = true;
-    els.go.disabled = true;
-    renderLoading();
-    try {
-      const res = await fetch('/api/plan', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from: chosen.from, to: chosen.to, date: els.date.value, days: Number(els.days.value), lang: lang === 'en' ? 'en' : 'no' }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw Object.assign(new Error(data.error || 'default'), { code: data.error });
-      lastPlan = data;
-      renderPlan(data);
-      drawMap(data);
-      if (window.matchMedia('(max-width: 900px)').matches) document.querySelector('.map-wrap').scrollIntoView({ behavior: 'smooth' });
-    } catch (err) {
-      els.results.innerHTML = '';
-      const errs = t('errors');
-      showError(errs[err.code] ?? (err instanceof TypeError ? errs.network : errs.default));
-    } finally {
-      loading = false;
-      els.go.disabled = false;
-    }
+    // A new start or destination starts a new route; same places (other date or days) keep the dragged route.
+    const same = (a, b) => a && b && a.lat === b.lat && a.lon === b.lon;
+    if (!lastPlan || !same(lastPlan.from, chosen.from) || !same(lastPlan.to, chosen.to)) vias = [];
+    const ok = await requestPlan({ fit: true });
+    if (ok && window.matchMedia('(max-width: 900px)').matches) document.querySelector('.map-wrap').scrollIntoView({ behavior: 'smooth' });
   });
 
   // --- Departure date picker ---------------------------------------------------------------------
@@ -550,7 +690,7 @@
     applyTexts();
     datePicker.rerender();
     renderAdPreview();
-    if (lastPlan) { renderPlan(lastPlan); drawMap(lastPlan); }
+    if (lastPlan) { renderPlan(lastPlan); drawMap(lastPlan, false); } else routeCtl.render();
   }));
 
   // --- Advertisement (Google AdSense) ------------------------------------------------------------
@@ -607,6 +747,7 @@
     els.results.innerHTML = '';
     hideError();
     layers.clearLayers(); markers.clear();
+    vias = []; routeUi.clearLayers(); ghost = null; routeCtl.render();
     showRegionMap();
     applyTexts();
     loadInfo();

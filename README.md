@@ -28,6 +28,17 @@ Reisevær helps tourists plan a road trip in **Australia** or **Norway**. You ch
 
 **Place names.** Towns are shown with their Norwegian name. Where the official main name is Sami, it is shown as well, for example "Drag (Ájluokta)".
 
+## Changing the route by dragging
+
+The route works like a walking route in Google Maps:
+
+- **Drag the route.** Point at the blue route and a white handle appears. Drag it to another town or road and let go: the route is recalculated through that point, and the days, stops and weather are updated. While you drag, a dashed line shows the new route.
+- **Via points.** Each place you drag to stays as a white dot. Drag a dot to move it, or click it to remove it. **Reset route** on the map removes them all.
+- **Phones.** Tap the route to place a handle, then drag it.
+- **What is kept.** Changing the date or the number of days keeps the via points. A new start or destination starts a new route.
+
+The server takes up to 10 via points (`vias` in POST /api/plan), all in the same country as the trip, and asks the router for a route through them in order. The router snaps each point to the nearest road. With via points, Norway no longer forces the route to stay inside Norway, because you have chosen the roads yourself.
+
 ## Australia
 
 You switch between Australia and Norway at the top of the page. In Australia, the app works like this:

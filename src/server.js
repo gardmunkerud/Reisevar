@@ -92,7 +92,7 @@ function createApp() {
     const started = Date.now();
     try {
       const body = req.body ?? {};
-      const result = await plan({ from: body.from, to: body.to, date: body.date, days: body.days, lang: body.lang === 'en' ? 'en' : 'no' });
+      const result = await plan({ from: body.from, to: body.to, date: body.date, days: body.days, vias: body.vias ?? [], lang: body.lang === 'en' ? 'en' : 'no' });
       console.log(`[plan] ${result.route.km} km, ${body.days} d, ${result.towns.length} towns, ${((Date.now() - started) / 1000).toFixed(1)}s`);
       res.json(result);
     } catch (err) {

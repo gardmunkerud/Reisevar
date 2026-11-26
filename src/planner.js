@@ -46,7 +46,8 @@ const todayIn = (regionId, lat = -33.87, lon = 151.21) => {
 };
 const MIN_KM_PER_DAY = 20;
 
-function validate({ from, to, date, days }) {
+const MAX_VIAS = 10;
+function validate({ from, to, date, days, vias = [] }) {
   const isPlace = (p) => p && typeof p.name === 'string' && regions.regionOf(p);
   if (!isPlace(from) || !isPlace(to)) throw new PlanError('invalid_place');
   const region = regions.regionOf(from);
@@ -58,7 +59,11 @@ function validate({ from, to, date, days }) {
   if (date < today) throw new PlanError('date_past');
   // The first day must be within the forecast; later days may go beyond it.
   if (date > addDays(today, config.limits.horizonDays)) throw new PlanError('beyond_forecast');
-  return { days: n, region, today };
+  // Via points the user dragged the route through (same country, at most MAX_VIAS).
+  if (!Array.isArray(vias) || vias.length > MAX_VIAS) throw new PlanError('invalid_via');
+  const cleanVias = vias.map((v) => ({ lat: Number(v?.lat), lon: Number(v?.lon) }));
+  if (cleanVias.some((v) => regions.regionOf(v) !== region)) throw new PlanError('invalid_via');
+  return { days: n, region, today, vias: cleanVias.map((v) => ({ lat: Math.round(v.lat * 1e5) / 1e5, lon: Math.round(v.lon * 1e5) / 1e5 })) };
 }
 
 // Run async jobs with limited parallelism (the HTTP layer also throttles per host).
@@ -92,7 +97,7 @@ function pickSpaced(list, count, minGapKm, taken, byWeather) {
 }
 
 async function plan(input) {
-  const { days, region, today } = validate(input);
+  const { days, region, today, vias } = validate(input);
   // Local time zone of a place (all of Norway: Oslo time; Australia: by state).
   const tzOf = (p) => (region.id === 'au' ? region.tz(p.lat, p.lon) : region.tz());
   // MET Norway's terms require contact information before any weather request is made.
@@ -102,7 +107,10 @@ async function plan(input) {
   const lastForecastDate = addDays(today, config.limits.horizonDays);
   const hasForecast = (d) => dates[d] <= lastForecastDate;
 
-  const route = region.keepInside ? await norwegianRoute(from, to) : { ...(await drivingRoute(from, to)), vias: [] };
+  // With via points from the user, the route goes exactly through them (the user has chosen the roads);
+  // otherwise Norway keeps the fastest route inside Norway.
+  const route = vias.length ? { ...(await drivingRoute(from, ...vias, to)), vias: [] }
+    : region.keepInside ? await norwegianRoute(from, to) : { ...(await drivingRoute(from, to)), vias: [] };
   if (route.km < 5) throw new PlanError('too_short');
   if (route.km / days < MIN_KM_PER_DAY) throw new PlanError('too_many_days');
   const segKm = route.km / days;
@@ -202,6 +210,7 @@ async function plan(input) {
 
   return {
     region: region.id,
+    vias,
     from: startStop, to: endStop,
     route: { km: Math.round(route.km), hours: Math.round(route.hours * 10) / 10, line: simplify(route.line) },
     days: plannedDays.map(({ endKm, ...d }) => d),

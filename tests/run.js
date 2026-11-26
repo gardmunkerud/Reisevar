@@ -213,6 +213,23 @@ test('australia: plan along an Australian route, local towns, no Norwegian warni
   for (const c of calls) assert.equal(c.ua.includes('test-contact@example.invalid'), c.url.includes('api.met.no'), c.url);
 });
 
+test('dragged route: via points go to the router in order and come back in the plan', async () => {
+  calls.length = 0;
+  const vias = [{ lat: -37.65, lon: 144.3 }, { lat: -37.4, lon: 143.2 }];
+  const res = await post({ from: MEL, to: ARARAT, date: todayIn('au', MEL.lat, MEL.lon), days: 1, vias });
+  assert.equal(res.status, 200, await res.clone().text());
+  const p = await res.json();
+  assert.deepEqual(p.vias, vias);
+  const routeCall = calls.find((c) => c.url.includes('/route/v1/driving/'));
+  assert.ok(routeCall, 'the router was asked');
+  const coords = decodeURIComponent(new URL(routeCall.url).pathname.split('/driving/')[1]).split(';');
+  assert.deepEqual(coords, ['144.96300,-37.81400', '144.30000,-37.65000', '143.20000,-37.40000', '142.94000,-37.28000']);
+  // A via point in another country, or too many, is refused.
+  assert.equal((await (await post({ from: MEL, to: ARARAT, date: todayIn('au'), days: 1, vias: [{ lat: 60, lon: 10 }] })).json()).error, 'invalid_via');
+  const many = Array.from({ length: 11 }, () => ({ lat: -37.5, lon: 144 }));
+  assert.equal((await (await post({ from: MEL, to: ARARAT, date: todayIn('au'), days: 1, vias: many })).json()).error, 'invalid_via');
+});
+
 test('australia: start and destination must be in the same country', async () => {
   const res = await post({ from: MEL, to: LHMR, date: todayOslo(), days: 2 });
   assert.equal((await res.json()).error, 'different_regions');
